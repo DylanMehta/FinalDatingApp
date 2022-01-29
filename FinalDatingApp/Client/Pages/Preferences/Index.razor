@@ -1,0 +1,63 @@
+﻿@page "/preferences/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3>Preferences</h3>
+
+@if (Preferences == null)
+{
+    <div class="alert alert-info">Loading Preferences...</div>
+}
+else
+{ 
+<table class="table table-responsive" id="bookingsTable">
+    <thead>
+        <tr>
+            <th>Preference Id</th>
+            <th>Target Gender</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Preference in Preferences)
+        {
+            <tr>
+                <td>@Preference.Id</td>
+                <td>@Preference.TargetGender</td>
+                <td>
+                    <a href="/Bookings/view/@Preference.Id" class="btn btn-primary">
+                        <span class="oi oi-book"></span>
+                    </a>
+                    <a href="/Bookings/edit/@Preference.Id" class="btn btn-warning">
+                        <span class="oi oi-pencil"></span>
+                    </a>
+                    <button class="btn btn-danger" @onclick="@(()=>Delete(Preference.Id))">
+                        <span class="oi oi-delete"></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+@code {
+    private List<Preference> Preferences;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Preferences = await _client.GetFromJsonAsync<List<Preference>>($"{Endpoints.PreferencesEndpoint}");
+    }
+
+    async Task Delete(int preferenceId)
+    {
+        var preference = Preferences.First(q => q.Id == preferenceId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to skip?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.PreferencesEndpoint}/{preferenceId}");
+            await OnInitializedAsync();
+        }
+    }
+}

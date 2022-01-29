@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalDatingApp.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220129160620_AddedDefaultDataAndUser")]
-    partial class AddedDefaultDataAndUser
+    [Migration("20220129182634_w")]
+    partial class w
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace FinalDatingApp.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c0a132a2-d2a8-4423-91cd-e96fdab496d1",
+                            ConcurrencyStamp = "dcb9e5cd-6cf1-4b40-802b-8813c21c5cfc",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -104,9 +104,9 @@ namespace FinalDatingApp.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBvNCDCoMYHaC8nvGFH+S57dsnl5QV2ANy8NlqbE1rbY0QMIXWZo+YEGXOVfYc53uA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEByNFrJj8IWgwkPpduKOcRDwqwREEkUuAyVL9MK9jndpOSv0xZ5BvbX6swtHaKb6pw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4ae7bab9-fab7-466e-897c-4d44abe3991b",
+                            SecurityStamp = "26a17f13-0f8e-46c3-9f93-0459567da7b2",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -213,7 +213,7 @@ namespace FinalDatingApp.Server.Migrations
                             FirstName = "Dylan",
                             Gender = "Female",
                             LastName = "Mehta",
-                            PreferenceId = 0
+                            PreferenceId = 1
                         },
                         new
                         {
@@ -222,7 +222,7 @@ namespace FinalDatingApp.Server.Migrations
                             FirstName = "Clarence",
                             Gender = "Male",
                             LastName = "Chew",
-                            PreferenceId = 0
+                            PreferenceId = 2
                         });
                 });
 
@@ -386,14 +386,14 @@ namespace FinalDatingApp.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "c8980992-681d-4e9c-bb65-3f13ca5d32cb",
+                            ConcurrencyStamp = "a9f3b5cf-a26c-408d-9165-93352080114a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "cac9342d-ade8-4918-8c08-ff98b897eab9",
+                            ConcurrencyStamp = "e84ff3bf-7604-4dcb-bd5d-a2c0041c9ba5",
                             Name = "User",
                             NormalizedName = "USER"
                         });

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinalDatingApp.Server.Migrations
 {
-    public partial class AddedDefaultDataAndUser : Migration
+    public partial class w : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -301,23 +301,14 @@ namespace FinalDatingApp.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "c8980992-681d-4e9c-bb65-3f13ca5d32cb", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "cac9342d-ade8-4918-8c08-ff98b897eab9", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "a9f3b5cf-a26c-408d-9165-93352080114a", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "e84ff3bf-7604-4dcb-bd5d-a2c0041c9ba5", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "c0a132a2-d2a8-4423-91cd-e96fdab496d1", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEBvNCDCoMYHaC8nvGFH+S57dsnl5QV2ANy8NlqbE1rbY0QMIXWZo+YEGXOVfYc53uA==", null, false, "4ae7bab9-fab7-466e-897c-4d44abe3991b", false, "Admin" });
-
-            migrationBuilder.InsertData(
-                table: "Persons",
-                columns: new[] { "Id", "Age", "FirstName", "Gender", "LastName", "PreferenceId" },
-                values: new object[,]
-                {
-                    { 1, 19, "Dylan", "Female", "Mehta", 0 },
-                    { 2, 19, "Clarence", "Male", "Chew", 0 }
-                });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "dcb9e5cd-6cf1-4b40-802b-8813c21c5cfc", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEByNFrJj8IWgwkPpduKOcRDwqwREEkUuAyVL9MK9jndpOSv0xZ5BvbX6swtHaKb6pw==", null, false, "26a17f13-0f8e-46c3-9f93-0459567da7b2", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Preferences",
@@ -332,6 +323,16 @@ namespace FinalDatingApp.Server.Migrations
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[] { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" });
+
+            migrationBuilder.InsertData(
+                table: "Persons",
+                columns: new[] { "Id", "Age", "FirstName", "Gender", "LastName", "PreferenceId" },
+                values: new object[] { 2, 19, "Clarence", "Male", "Chew", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Persons",
+                columns: new[] { "Id", "Age", "FirstName", "Gender", "LastName", "PreferenceId" },
+                values: new object[] { 1, 19, "Dylan", "Female", "Mehta", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

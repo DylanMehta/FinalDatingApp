@@ -19,7 +19,8 @@ namespace FinalDatingApp.Server.Configurations.Entities
                     FirstName = "Dylan",
                     LastName = "Mehta",
                     Gender = "Female",
-                    Age = 19
+                    Age = 19,
+                    PreferenceId = 1
                 },
                 new Person
                 {
@@ -27,7 +28,8 @@ namespace FinalDatingApp.Server.Configurations.Entities
                     FirstName = "Clarence",
                     LastName = "Chew",
                     Gender = "Male",
-                    Age = 19
+                    Age = 19,
+                    PreferenceId = 2
                 }
                 );
         }

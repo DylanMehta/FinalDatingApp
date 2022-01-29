@@ -1,0 +1,67 @@
+﻿@page "/matchs/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3>Matchs</h3>
+
+@if (Matchs == null)
+{
+    <div class="alert alert-info">Loading Matchs...</div>
+}
+else
+{ 
+<table class="table table-responsive" id="bookingsTable">
+    <thead>
+        <tr>
+            <th>Match Id</th>
+            <th>Accept or Not</th>
+            <th>First User Id</th>
+            <th>Second User Id</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Match in Matchs)
+        {
+            <tr>
+                <td>@Match.Id</td>
+                <td>@Match.AcceptOrNot</td>
+                <td>@Match.FirstUserId</td>
+                <td>@Match.SecondUserId</td>
+                <td>
+                    <a href="/Bookings/view/@Match.Id" class="btn btn-primary">
+                        <span class="oi oi-book"></span>
+                    </a>
+                    <a href="/Bookings/edit/@Match.Id" class="btn btn-warning">
+                        <span class="oi oi-pencil"></span>
+                    </a>
+                    <button class="btn btn-danger" @onclick="@(()=>Delete(Match.Id))">
+                        <span class="oi oi-delete"></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+@code {
+    private List<Match> Matchs;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Matchs = await _client.GetFromJsonAsync<List<Match>>($"{Endpoints.MatchsEndpoint}");
+    }
+
+    async Task Delete(int matchId)
+    {
+        var match = Matchs.First(q => q.Id == matchId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to skip?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.MatchsEndpoint}/{matchId}");
+            await OnInitializedAsync();
+        }
+    }
+}

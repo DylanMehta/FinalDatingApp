@@ -42,11 +42,10 @@ namespace FinalDatingApp.Server.Data
             .OnDelete(DeleteBehavior.Restrict);
         }
 
-
         public DbSet<Person> Persons { get; set; }
         public DbSet<Preference> Preferences { get; set; }
         public DbSet<Media> Medias { get; set; }
-        public DbSet<Match> Matches { get; set; }
+        public DbSet<Match> Matchs { get; set; }
         public DbSet<Message> Messages { get; set; }
     }
 }
