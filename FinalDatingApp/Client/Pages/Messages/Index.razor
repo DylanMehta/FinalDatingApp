@@ -3,6 +3,8 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
+
+
 <h3>Messages</h3>
 <a href="/messages/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
@@ -10,6 +12,8 @@
 </a>
 <br />
 <br />
+
+
 
 @if (Messages == null)
 {
@@ -32,7 +36,7 @@ else
                 <tr>
                     <td>@Message.Id</td>
                     <td>@Message.Text</td>
-                    <td>@Message.MatchId</td>
+                    <td>@GetName(Message.Match.FirstPersonId), @GetName(Message.Match.SecondPersonId)</td>
                     <td>
                         <a href="/Bookings/view/@Message.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
@@ -50,13 +54,21 @@ else
     </table>
 }
 
+
+
 @code {
     private List<Message> Messages;
+    private List<Person> Persons;
+
+
 
     protected async override Task OnInitializedAsync()
     {
         Messages = await _client.GetFromJsonAsync<List<Message>>($"{Endpoints.MessagesEndpoint}");
+        Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
     }
+
+
 
     async Task Delete(int messageId)
     {
@@ -67,5 +79,13 @@ else
             await _client.DeleteAsync($"{Endpoints.MessagesEndpoint}/{messageId}");
             await OnInitializedAsync();
         }
+    }
+
+
+
+    private String GetName(int id)
+    {
+        var name = Persons.First(q => q.Id == id);
+        return name.FirstName + " " + name.LastName;
     }
 }
