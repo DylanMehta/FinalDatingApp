@@ -38,10 +38,10 @@ else
                     <td>@Message.Text</td>
                     <td>@GetName(Message.Match.FirstPersonId), @GetName(Message.Match.SecondPersonId)</td>
                     <td>
-                        <a href="/Bookings/view/@Message.Id" class="btn btn-primary">
+                        <a href="/messages/view/@Message.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
                         </a>
-                        <a href="/Bookings/edit/@Message.Id" class="btn btn-warning">
+                        <a href="/messages/edit/@Message.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
                         <button class="btn btn-danger" @onclick="@(()=>Delete(Message.Id))">

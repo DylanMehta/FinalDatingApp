@@ -1,0 +1,21 @@
+﻿<EditForm Model="@preference" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Target Gender:</label>
+        <div>
+            <InputText @bind-Value="@preference.TargetGender" class="form-control" />
+            <ValidationMessage For="@(() => preference.TargetGender)" />
+        </div>
+    </div>
+    <button type="submit" class="btn-btn-success btn-block">
+        @ButtonText
+    </button>
+</EditForm>
+
+@code {
+    [Parameter] public Preference preference { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}
