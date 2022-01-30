@@ -1,0 +1,23 @@
+﻿@page "/matchs/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditMatch" match="match" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Match match = new Match();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        match = await _client.GetFromJsonAsync<Match>($"{Endpoints.MatchsEndpoint}/{id}");
+    }
+    async Task EditMatch()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.MatchsEndpoint}/{id}", match);
+        _navManager.NavigateTo("/matchs/");
+    }
+
+}

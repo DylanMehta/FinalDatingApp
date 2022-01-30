@@ -1,0 +1,63 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@match" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Accepted?:</label>
+        <div>
+            <InputCheckbox @bind-Value="@match.AcceptOrNot" class="form-control" />
+            <ValidationMessage For="@(() => match.AcceptOrNot)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>First User:</label>
+        <div>
+            <InputSelect @bind-Value="@match.FirstPersonId" class="form-control">
+                <option value="">--Select First User</option>
+                @if (Persons != null)
+                {
+                    foreach (var person in Persons)
+                    {
+                        <option value="@person.Id">@person.FirstName - @person.LastName</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => match.FirstPersonId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Second User:</label>
+        <div>
+            <InputSelect @bind-Value="@match.SecondPersonId" class="form-control">
+                <option value="">--Select Second User</option>
+                @if (Persons != null)
+                {
+                    foreach (var person in Persons)
+                    {
+                        <option value="@person.Id">@person.FirstName - @person.LastName</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => match.SecondPersonId)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn-btn-success btn-block">
+        Create Match
+    </button>
+</EditForm>
+
+@code {
+    [Parameter] public Match match { get; set; }
+    [Parameter] public String ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Person> Persons;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
+    }
+}
