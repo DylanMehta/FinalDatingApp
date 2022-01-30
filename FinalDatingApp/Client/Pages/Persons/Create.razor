@@ -6,61 +6,7 @@
 <hr />
 <br />
 
-<EditForm Model="@person" OnValidSubmit="CreatePerson">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
 
-    <div class="form-group">
-        <label>First Name:</label>
-        <div>
-            <InputText @bind-Value="@person.FirstName" class="form-control" />
-            <ValidationMessage For="@(() => person.FirstName)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Last Name:</label>
-        <div>
-            <InputText @bind-Value="@person.LastName" class="form-control" />
-            <ValidationMessage For="@(() => person.LastName)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Gender:</label>
-        <div>
-            <InputText @bind-Value="@person.Gender" class="form-control" />
-            <ValidationMessage For="@(() => person.Gender)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Target Gender:</label>
-        <div>
-            <InputSelect @bind-Value="@person.PreferenceId" class="form-control">
-                <option value="">--Select Gender</option>
-                @if (Preferences != null)
-                {
-                    foreach (var preference in Preferences)
-                    {
-                        <option value="@preference.Id">@preference.TargetGender</option>
-                    }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => person.PreferenceId)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Age:</label>
-        <div>
-            <InputNumber @bind-Value="@person.Age" class="form-control" />
-            <ValidationMessage For="@(() => person.Age)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn-btn-success btn-block">
-        Create Person
-    </button>
-
-
-</EditForm>
 
 
 @code {

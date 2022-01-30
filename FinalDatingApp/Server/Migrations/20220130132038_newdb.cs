@@ -301,14 +301,14 @@ namespace FinalDatingApp.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "bbbc7d10-1174-479d-be3d-b0c6662a54bb", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "881d2395-be2d-45ab-8c9d-9836d43ef329", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "44a6022b-7b65-46d6-aa1d-94a09d839742", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "8f728a1d-730a-4f57-a946-9fd146fe6559", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "2c7bb6a1-069e-4997-a5d2-9fdc902112f0", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEMY0JQ9BR4Qh9AnwVnzLy5bGDczx9eRnWBLbxC/cnFZ7WiyM0ayLRc6ewMbz68ygnA==", null, false, "177f20fb-c186-443c-8a23-261b648c0e53", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "0a431fc3-b5d5-47e5-b66d-3a73ee646b07", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEPoxFWWd4OKDsqEdNBexF1ZoQSr0gaXhGfnDrIAzgxM2R3As4sVzQv/tRTRjBMdkww==", null, false, "227f80f4-2ebf-48c4-8221-e8139bc32268", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Preferences",

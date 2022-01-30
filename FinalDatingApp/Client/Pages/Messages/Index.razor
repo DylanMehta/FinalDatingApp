@@ -32,7 +32,7 @@ else
                 <tr>
                     <td>@Message.Id</td>
                     <td>@Message.Text</td>
-                    <td>@Message.Match.FirstPerson.FirstName @Message.Match.FirstPerson.LastName, @Message.Match.SecondPerson.FirstName @Message.Match.SecondPerson.LastName</td>
+                    <td>@Message.MatchId</td>
                     <td>
                         <a href="/Bookings/view/@Message.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
@@ -52,6 +52,11 @@ else
 
 @code {
     private List<Message> Messages;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Messages = await _client.GetFromJsonAsync<List<Message>>($"{Endpoints.MessagesEndpoint}");
+    }
 
     async Task Delete(int messageId)
     {
