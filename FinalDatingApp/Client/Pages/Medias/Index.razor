@@ -22,7 +22,7 @@ else
             <tr>
                 <th>Media Id</th>
                 <th>Photo</th>
-                <!--<th>Name</th>-->
+                <th>Person</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -31,8 +31,8 @@ else
             {
                 <tr>
                     <td>@Media.Id</td>
-                    <td>@Media.Photo</td>
-                    <!-- <td>@Media.Person.FirstName @Media.Person.LastName</td> -->
+                    <td><img src="@Media.Photo" height="20"/></td>
+                    <td>@Media.Person.FirstName @Media.Person.LastName</td>
                     <td>
                         <a href="/Bookings/view/@Media.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>

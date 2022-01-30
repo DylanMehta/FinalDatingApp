@@ -11,10 +11,26 @@
     <ValidationSummary />
 
     <div class="form-group">
-        <label>Accepted?:</label>
+        <label>Text:</label>
         <div>
             <InputText @bind-Value="@message.Text" class="form-control" />
             <ValidationMessage For="@(() => message.Text)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Match Persons:</label>
+        <div>
+            <InputSelect @bind-Value="@message.MatchId" class="form-control">
+                <option value="">--Select Match Persons</option>
+                @if (Matchs != null)
+                {
+                    foreach (var match in Matchs)
+                    {
+                        <option value="@match.Id">@match.FirstPerson.FirstName @match.FirstPerson.LastName, @match.SecondPerson.FirstName @match.SecondPerson.LastName</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => message.MatchId)" />
         </div>
     </div>
     <button type="submit" class="btn-btn-success btn-block">
@@ -26,6 +42,13 @@
 @code {
 
     Message message = new Message();
+
+    private IList<Match> Matchs;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Matchs = await _client.GetFromJsonAsync<List<Match>>($"{Endpoints.MatchsEndpoint}");
+    }
 
     private async Task CreateMessage()
     {
