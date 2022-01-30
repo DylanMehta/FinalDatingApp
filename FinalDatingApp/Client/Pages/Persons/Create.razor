@@ -5,25 +5,14 @@
 <h3 class="card-title">Create New Persons</h3>
 <hr />
 <br />
-
-
-
-
+<FormComponent ButtonText="Create Person" OnValidSubmit="@CreatePerson" person="person" />
 @code {
 
     Person person = new Person();
-
-    private IList<Preference> Preferences;
-
-    protected async override Task OnInitializedAsync()
-    {
-        Preferences = await _client.GetFromJsonAsync<List<Preference>>($"{Endpoints.PreferencesEndpoint}");
-    }
 
     private async Task CreatePerson()
     {
         await _client.PostAsJsonAsync(Endpoints.PersonsEndpoint, person);
         _navManager.NavigateTo("/persons");
     }
-
 }
