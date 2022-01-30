@@ -19,7 +19,7 @@ else
             <th>Last Name</th>
             <th>Gender</th>
             <th>Age</th>
-            <th>Preference Id</th>
+            <th>Preference</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -32,7 +32,7 @@ else
                 <td>@Person.LastName</td>
                 <td>@Person.Gender</td>
                 <td>@Person.Age</td>
-                <td>@Person.PreferenceId</td>
+                <td>@Person.Preference.TargetGender</td>
                 <td>
                     <a href="/Bookings/view/@Person.Id" class="btn btn-primary">
                         <span class="oi oi-book"></span>
@@ -61,7 +61,7 @@ else
     async Task Delete(int personId)
     {
         var person = Persons.First(q => q.Id == personId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to skip?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to delete?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.PersonsEndpoint}/{personId}");

@@ -16,7 +16,7 @@ else
         <tr>
             <th>Media Id</th>
             <th>Photo</th>
-            <th>User Id</th>
+            <th>Name</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -26,7 +26,7 @@ else
             <tr>
                 <td>@Media.Id</td>
                 <td>@Media.Photo</td>
-                <td>@Media.UserId</td>
+                <td>@Media.Person.FirstName @Media.Person.LastName</td>
                 <td>
                     <a href="/Bookings/view/@Media.Id" class="btn btn-primary">
                         <span class="oi oi-book"></span>
@@ -55,7 +55,7 @@ else
     async Task Delete(int mediaId)
     {
         var media = Medias.First(q => q.Id == mediaId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to skip?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to delete?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.MediasEndpoint}/{mediaId}");

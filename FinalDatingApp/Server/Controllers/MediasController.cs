@@ -31,7 +31,7 @@ namespace FinalDatingApp.Server.Controllers
         public async Task<IActionResult> GetMedias()
         {
             //return await _context.Medias.ToListAsync();
-            var Medias = await _unitOfWork.Medias.GetAll(includes: q => q.Include(x => x.User));
+            var Medias = await _unitOfWork.Medias.GetAll(includes: q => q.Include(x => x.Person));
             return Ok(Medias);
         }
 

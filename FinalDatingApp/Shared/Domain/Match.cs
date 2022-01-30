@@ -10,12 +10,12 @@ namespace FinalDatingApp.Shared.Domain
     public class Match : BaseDomainModel
     {
         public Boolean AcceptOrNot { get; set; }
-        public int FirstUserId { get; set; }
-        public int SecondUserId { get; set; }
+        public int FirstPersonId { get; set; }
+        public int SecondPersonId { get; set; }
 
-        [ForeignKey("FirstUserId")]
-        public virtual Person FirstUser { get; set; }
-        [ForeignKey("SecondUserId")]
-        public virtual Person SecondUser { get; set; }
+        [ForeignKey("FirstPersonId")]
+        public virtual Person FirstPerson { get; set; }
+        [ForeignKey("SecondPersonId")]
+        public virtual Person SecondPerson { get; set; }
     }
 }

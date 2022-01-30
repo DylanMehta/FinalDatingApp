@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinalDatingApp.Server.Migrations
 {
-    public partial class w : Migration
+    public partial class a : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -230,27 +230,27 @@ namespace FinalDatingApp.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Matches",
+                name: "Matchs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AcceptOrNot = table.Column<bool>(type: "bit", nullable: false),
-                    FirstUserId = table.Column<int>(type: "int", nullable: false),
-                    SecondUserId = table.Column<int>(type: "int", nullable: false)
+                    FirstPersonId = table.Column<int>(type: "int", nullable: false),
+                    SecondPersonId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Matches", x => x.Id);
+                    table.PrimaryKey("PK_Matchs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Matches_Persons_FirstUserId",
-                        column: x => x.FirstUserId,
+                        name: "FK_Matchs_Persons_FirstPersonId",
+                        column: x => x.FirstPersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Matches_Persons_SecondUserId",
-                        column: x => x.SecondUserId,
+                        name: "FK_Matchs_Persons_SecondPersonId",
+                        column: x => x.SecondPersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -263,14 +263,14 @@ namespace FinalDatingApp.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    PersonId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medias", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Medias_Persons_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Medias_Persons_PersonId",
+                        column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -289,9 +289,9 @@ namespace FinalDatingApp.Server.Migrations
                 {
                     table.PrimaryKey("PK_Messages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Messages_Matches_MatchId",
+                        name: "FK_Messages_Matchs_MatchId",
                         column: x => x.MatchId,
-                        principalTable: "Matches",
+                        principalTable: "Matchs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -301,14 +301,14 @@ namespace FinalDatingApp.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "a9f3b5cf-a26c-408d-9165-93352080114a", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "e84ff3bf-7604-4dcb-bd5d-a2c0041c9ba5", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "a2a11d34-8251-46fc-86bf-fe0deb270010", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "afdf566a-80be-4893-8cb1-cf0669133608", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "dcb9e5cd-6cf1-4b40-802b-8813c21c5cfc", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEByNFrJj8IWgwkPpduKOcRDwqwREEkUuAyVL9MK9jndpOSv0xZ5BvbX6swtHaKb6pw==", null, false, "26a17f13-0f8e-46c3-9f93-0459567da7b2", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "b063ef5c-ac32-4bd1-aae3-e0a4737679e5", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEMdl6iDQReydXIxjOnXXdunw71tq4nVAgeqNjkrM944haIg7IeUAG7Zd9U3Pjp+Faw==", null, false, "42d164fd-5e86-4064-abf6-295f0d3e7501", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Preferences",
@@ -385,19 +385,19 @@ namespace FinalDatingApp.Server.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matches_FirstUserId",
-                table: "Matches",
-                column: "FirstUserId");
+                name: "IX_Matchs_FirstPersonId",
+                table: "Matchs",
+                column: "FirstPersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matches_SecondUserId",
-                table: "Matches",
-                column: "SecondUserId");
+                name: "IX_Matchs_SecondPersonId",
+                table: "Matchs",
+                column: "SecondPersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Medias_UserId",
+                name: "IX_Medias_PersonId",
                 table: "Medias",
-                column: "UserId");
+                column: "PersonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_MatchId",
@@ -461,7 +461,7 @@ namespace FinalDatingApp.Server.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Matches");
+                name: "Matchs");
 
             migrationBuilder.DropTable(
                 name: "Persons");

@@ -31,7 +31,7 @@ namespace FinalDatingApp.Server.Controllers
         public async Task<IActionResult> GetPersons()
         {
             //return await _context.Persons.ToListAsync();
-            var Persons = await _unitOfWork.Persons.GetAll();
+            var Persons = await _unitOfWork.Persons.GetAll(includes: q => q.Include(x => x.Preference));
             return Ok(Persons);
         }
 

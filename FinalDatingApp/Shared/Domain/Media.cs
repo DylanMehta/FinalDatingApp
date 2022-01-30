@@ -9,7 +9,7 @@ namespace FinalDatingApp.Shared.Domain
     public class Media : BaseDomainModel
     {
         public String Photo { get; set; }
-        public int UserId { get; set; }
-        public virtual Person User { get; set; }
+        public int PersonId { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

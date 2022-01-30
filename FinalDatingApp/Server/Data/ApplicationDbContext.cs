@@ -30,15 +30,15 @@ namespace FinalDatingApp.Server.Data
             modelBuilder.ApplyConfiguration(new PreferenceSeedConfiguration());
 
             modelBuilder.Entity<Match>()
-            .HasOne(m => m.FirstUser)
+            .HasOne(m => m.FirstPerson)
             .WithMany(t => t.FirstMatch)
-            .HasForeignKey(m => m.FirstUserId)
+            .HasForeignKey(m => m.FirstPersonId)
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Match>()
-            .HasOne(m => m.SecondUser)
+            .HasOne(m => m.SecondPerson)
             .WithMany(t => t.SecondMatch)
-            .HasForeignKey(m => m.SecondUserId)
+            .HasForeignKey(m => m.SecondPersonId)
             .OnDelete(DeleteBehavior.Restrict);
         }
 

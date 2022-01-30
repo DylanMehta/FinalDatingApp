@@ -94,7 +94,7 @@ namespace FinalDatingApp.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dcb9e5cd-6cf1-4b40-802b-8813c21c5cfc",
+                            ConcurrencyStamp = "b063ef5c-ac32-4bd1-aae3-e0a4737679e5",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -102,9 +102,9 @@ namespace FinalDatingApp.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEByNFrJj8IWgwkPpduKOcRDwqwREEkUuAyVL9MK9jndpOSv0xZ5BvbX6swtHaKb6pw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMdl6iDQReydXIxjOnXXdunw71tq4nVAgeqNjkrM944haIg7IeUAG7Zd9U3Pjp+Faw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "26a17f13-0f8e-46c3-9f93-0459567da7b2",
+                            SecurityStamp = "42d164fd-5e86-4064-abf6-295f0d3e7501",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -120,19 +120,19 @@ namespace FinalDatingApp.Server.Migrations
                     b.Property<bool>("AcceptOrNot")
                         .HasColumnType("bit");
 
-                    b.Property<int>("FirstUserId")
+                    b.Property<int>("FirstPersonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondUserId")
+                    b.Property<int>("SecondPersonId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FirstUserId");
+                    b.HasIndex("FirstPersonId");
 
-                    b.HasIndex("SecondUserId");
+                    b.HasIndex("SecondPersonId");
 
-                    b.ToTable("Matches");
+                    b.ToTable("Matchs");
                 });
 
             modelBuilder.Entity("FinalDatingApp.Shared.Domain.Media", b =>
@@ -142,15 +142,15 @@ namespace FinalDatingApp.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Medias");
                 });
@@ -384,14 +384,14 @@ namespace FinalDatingApp.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "a9f3b5cf-a26c-408d-9165-93352080114a",
+                            ConcurrencyStamp = "a2a11d34-8251-46fc-86bf-fe0deb270010",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "e84ff3bf-7604-4dcb-bd5d-a2c0041c9ba5",
+                            ConcurrencyStamp = "afdf566a-80be-4893-8cb1-cf0669133608",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -514,32 +514,32 @@ namespace FinalDatingApp.Server.Migrations
 
             modelBuilder.Entity("FinalDatingApp.Shared.Domain.Match", b =>
                 {
-                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "FirstUser")
+                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "FirstPerson")
                         .WithMany("FirstMatch")
-                        .HasForeignKey("FirstUserId")
+                        .HasForeignKey("FirstPersonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "SecondUser")
+                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "SecondPerson")
                         .WithMany("SecondMatch")
-                        .HasForeignKey("SecondUserId")
+                        .HasForeignKey("SecondPersonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("FirstUser");
+                    b.Navigation("FirstPerson");
 
-                    b.Navigation("SecondUser");
+                    b.Navigation("SecondPerson");
                 });
 
             modelBuilder.Entity("FinalDatingApp.Shared.Domain.Media", b =>
                 {
-                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "User")
+                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("FinalDatingApp.Shared.Domain.Message", b =>

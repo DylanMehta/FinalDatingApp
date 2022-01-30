@@ -55,7 +55,7 @@ else
     async Task Delete(int messageId)
     {
         var message = Messages.First(q => q.Id == messageId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to skip?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to delete?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.MessagesEndpoint}/{messageId}");

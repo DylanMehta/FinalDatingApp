@@ -27,8 +27,8 @@ else
             <tr>
                 <td>@Match.Id</td>
                 <td>@Match.AcceptOrNot</td>
-                <td>@Match.FirstUserId</td>
-                <td>@Match.SecondUserId</td>
+                <td>@Match.FirstPersonId</td>
+                <td>@Match.SecondPersonId</td>
                 <td>
                     <a href="/Bookings/view/@Match.Id" class="btn btn-primary">
                         <span class="oi oi-book"></span>
@@ -57,7 +57,7 @@ else
     async Task Delete(int matchId)
     {
         var match = Matchs.First(q => q.Id == matchId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to skip?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to delete?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.MatchsEndpoint}/{matchId}");

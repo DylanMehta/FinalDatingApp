@@ -53,7 +53,7 @@ else
     async Task Delete(int preferenceId)
     {
         var preference = Preferences.First(q => q.Id == preferenceId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to skip?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to delete?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.PreferencesEndpoint}/{preferenceId}");
