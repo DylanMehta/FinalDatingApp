@@ -1,0 +1,43 @@
+﻿@page "/medias/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Media</h3>
+<hr />
+<br />
+
+<EditForm Model="@media" OnValidSubmit="CreateMedia">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Photo:</label>
+        <div>
+            <InputText @bind-Value="@media.Photo" class="form-control" />
+            <ValidationMessage For="@(() => media.Photo)" />
+        </div>
+    </div>
+    <button type="submit" class="btn-btn-success btn-block">
+        Create Media
+    </button>
+</EditForm>
+
+
+@code {
+
+    Media media = new Media();
+
+    private IList<Person> Persons;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
+    }
+
+    private async Task CreateMedia()
+    {
+        await _client.PostAsJsonAsync(Endpoints.MediasEndpoint, media);
+        _navManager.NavigateTo("/medias");
+    }
+
+}

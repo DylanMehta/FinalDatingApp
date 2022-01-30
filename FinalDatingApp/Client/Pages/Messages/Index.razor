@@ -4,44 +4,50 @@
 @attribute [Authorize]
 
 <h3>Messages</h3>
+<a href="/messages/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Message
+</a>
+<br />
+<br />
 
 @if (Messages == null)
 {
     <div class="alert alert-info">Loading Messages...</div>
 }
 else
-{ 
-<table class="table table-responsive" id="bookingsTable">
-    <thead>
-        <tr>
-            <th>Message Id</th>
-            <th>Text</th>
-            <th>Match Id</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Message in Messages)
-        {
+{
+    <table class="table table-responsive" id="bookingsTable">
+        <thead>
             <tr>
-                <td>@Message.Id</td>
-                <td>@Message.Text</td>
-                <td>@Message.MatchId</td>
-                <td>
-                    <a href="/Bookings/view/@Message.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/Bookings/edit/@Message.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(Message.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
+                <th>Message Id</th>
+                <th>Text</th>
+                <th>Match Id</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var Message in Messages)
+            {
+                <tr>
+                    <td>@Message.Id</td>
+                    <td>@Message.Text</td>
+                    <td>@Message.MatchId</td>
+                    <td>
+                        <a href="/Bookings/view/@Message.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/Bookings/edit/@Message.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Message.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {

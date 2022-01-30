@@ -4,46 +4,52 @@
 @attribute [Authorize]
 
 <h3>Matchs</h3>
+<a href="/matchs/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Match
+</a>
+<br />
+<br />
 
 @if (Matchs == null)
 {
     <div class="alert alert-info">Loading Matchs...</div>
 }
 else
-{ 
-<table class="table table-responsive" id="bookingsTable">
-    <thead>
-        <tr>
-            <th>Match Id</th>
-            <th>Accept or Not</th>
-            <th>First User Id</th>
-            <th>Second User Id</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Match in Matchs)
-        {
+{
+    <table class="table table-responsive" id="bookingsTable">
+        <thead>
             <tr>
-                <td>@Match.Id</td>
-                <td>@Match.AcceptOrNot</td>
-                <td>@Match.FirstPersonId</td>
-                <td>@Match.SecondPersonId</td>
-                <td>
-                    <a href="/Bookings/view/@Match.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/Bookings/edit/@Match.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(Match.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
+                <th>Match Id</th>
+                <th>Accept or Not</th>
+                <th>First User Id</th>
+                <th>Second User Id</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var Match in Matchs)
+            {
+                <tr>
+                    <td>@Match.Id</td>
+                    <td>@Match.AcceptOrNot</td>
+                    <td>@Match.FirstPerson.FirstName  @Match.FirstPerson.LastName</td>
+                    <td>@Match.SecondPerson.FirstName  @Match.SecondPerson.LastName</td>
+                    <td>
+                        <a href="/matchs/view/@Match.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/matchs/edit/@Match.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Match.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {

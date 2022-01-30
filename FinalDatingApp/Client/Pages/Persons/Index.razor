@@ -4,50 +4,56 @@
 @attribute [Authorize]
 
 <h3>Persons</h3>
+<a href="/persons/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Person
+</a>
+<br />
+<br />
 
 @if (Persons == null)
 {
     <div class="alert alert-info">Loading Persons...</div>
 }
 else
-{ 
-<table class="table table-responsive" id="bookingsTable">
-    <thead>
-        <tr>
-            <th>Person Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Preference</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Person in Persons)
-        {
+{
+    <table class="table table-responsive" id="bookingsTable">
+        <thead>
             <tr>
-                <td>@Person.Id</td>
-                <td>@Person.FirstName</td>
-                <td>@Person.LastName</td>
-                <td>@Person.Gender</td>
-                <td>@Person.Age</td>
-                <td>@Person.Preference.TargetGender</td>
-                <td>
-                    <a href="/Bookings/view/@Person.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/Bookings/edit/@Person.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(Person.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
+                <th>Person Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Preference</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var Person in Persons)
+            {
+                <tr>
+                    <td>@Person.Id</td>
+                    <td>@Person.FirstName</td>
+                    <td>@Person.LastName</td>
+                    <td>@Person.Gender</td>
+                    <td>@Person.Age</td>
+                    <td>@Person.Preference.TargetGender</td>
+                    <td>
+                        <a href="/persons/view/@Person.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/persons/edit/@Person.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Person.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {

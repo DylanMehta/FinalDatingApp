@@ -1,0 +1,38 @@
+﻿@page "/preferences/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Preference</h3>
+<hr />
+<br />
+
+<EditForm Model="@preference" OnValidSubmit="CreatePreference">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Target Gender:</label>
+        <div>
+            <InputText @bind-Value="@preference.TargetGender" class="form-control" />
+            <ValidationMessage For="@(() => preference.TargetGender)" />
+        </div>
+    </div>
+    <button type="submit" class="btn-btn-success btn-block">
+        Create Preference
+    </button>
+
+
+</EditForm>
+
+
+@code {
+
+    Preference preference = new Preference();
+
+    private async Task CreatePreference()
+    {
+        await _client.PostAsJsonAsync(Endpoints.PreferencesEndpoint, preference);
+        _navManager.NavigateTo("/preferences");
+    }
+
+}

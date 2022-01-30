@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalDatingApp.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220130074725_a")]
-    partial class a
+    [Migration("20220130091614_newdb")]
+    partial class newdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace FinalDatingApp.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b063ef5c-ac32-4bd1-aae3-e0a4737679e5",
+                            ConcurrencyStamp = "2c7bb6a1-069e-4997-a5d2-9fdc902112f0",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -104,9 +104,9 @@ namespace FinalDatingApp.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMdl6iDQReydXIxjOnXXdunw71tq4nVAgeqNjkrM944haIg7IeUAG7Zd9U3Pjp+Faw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMY0JQ9BR4Qh9AnwVnzLy5bGDczx9eRnWBLbxC/cnFZ7WiyM0ayLRc6ewMbz68ygnA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "42d164fd-5e86-4064-abf6-295f0d3e7501",
+                            SecurityStamp = "177f20fb-c186-443c-8a23-261b648c0e53",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -386,14 +386,14 @@ namespace FinalDatingApp.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "a2a11d34-8251-46fc-86bf-fe0deb270010",
+                            ConcurrencyStamp = "bbbc7d10-1174-479d-be3d-b0c6662a54bb",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "afdf566a-80be-4893-8cb1-cf0669133608",
+                            ConcurrencyStamp = "881d2395-be2d-45ab-8c9d-9836d43ef329",
                             Name = "User",
                             NormalizedName = "USER"
                         });

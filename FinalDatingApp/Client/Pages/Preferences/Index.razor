@@ -4,42 +4,48 @@
 @attribute [Authorize]
 
 <h3>Preferences</h3>
+<a href="/preferences/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Preference
+</a>
+<br />
+<br />
 
 @if (Preferences == null)
 {
     <div class="alert alert-info">Loading Preferences...</div>
 }
 else
-{ 
-<table class="table table-responsive" id="bookingsTable">
-    <thead>
-        <tr>
-            <th>Preference Id</th>
-            <th>Target Gender</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Preference in Preferences)
-        {
+{
+    <table class="table table-responsive" id="bookingsTable">
+        <thead>
             <tr>
-                <td>@Preference.Id</td>
-                <td>@Preference.TargetGender</td>
-                <td>
-                    <a href="/Bookings/view/@Preference.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/Bookings/edit/@Preference.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(Preference.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
+                <th>Preference Id</th>
+                <th>Target Gender</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var Preference in Preferences)
+            {
+                <tr>
+                    <td>@Preference.Id</td>
+                    <td>@Preference.TargetGender</td>
+                    <td>
+                        <a href="/preferences/view/@Preference.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/preferences/edit/@Preference.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Preference.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {

@@ -4,44 +4,50 @@
 @attribute [Authorize]
 
 <h3>Medias</h3>
+<a href="/medias/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Media
+</a>
+<br />
+<br />
 
 @if (Medias == null)
 {
     <div class="alert alert-info">Loading Medias...</div>
 }
 else
-{ 
-<table class="table table-responsive" id="bookingsTable">
-    <thead>
-        <tr>
-            <th>Media Id</th>
-            <th>Photo</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Media in Medias)
-        {
+{
+    <table class="table table-responsive" id="bookingsTable">
+        <thead>
             <tr>
-                <td>@Media.Id</td>
-                <td>@Media.Photo</td>
-                <td>@Media.Person.FirstName @Media.Person.LastName</td>
-                <td>
-                    <a href="/Bookings/view/@Media.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/Bookings/edit/@Media.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(Media.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
+                <th>Media Id</th>
+                <th>Photo</th>
+                <!--<th>Name</th>-->
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var Media in Medias)
+            {
+                <tr>
+                    <td>@Media.Id</td>
+                    <td>@Media.Photo</td>
+                    <!-- <td>@Media.Person.FirstName @Media.Person.LastName</td> -->
+                    <td>
+                        <a href="/Bookings/view/@Media.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/Bookings/edit/@Media.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Media.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {

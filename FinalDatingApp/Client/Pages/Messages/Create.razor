@@ -1,0 +1,36 @@
+﻿@page "/messages/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Message</h3>
+<hr />
+<br />
+
+<EditForm Model="@message" OnValidSubmit="CreateMessage">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Accepted?:</label>
+        <div>
+            <InputText @bind-Value="@message.Text" class="form-control" />
+            <ValidationMessage For="@(() => message.Text)" />
+        </div>
+    </div>
+    <button type="submit" class="btn-btn-success btn-block">
+        Create Message
+    </button>
+</EditForm>
+
+
+@code {
+
+    Message message = new Message();
+
+    private async Task CreateMessage()
+    {
+        await _client.PostAsJsonAsync(Endpoints.MessagesEndpoint, message);
+        _navManager.NavigateTo("/messages");
+    }
+
+}
