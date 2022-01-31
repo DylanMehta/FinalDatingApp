@@ -5,50 +5,11 @@
 <h3 class="card-title">Create New Medias</h3>
 <hr />
 <br />
-
-<EditForm Model="@media" OnValidSubmit="CreateMedia">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Photo:</label>
-        <div>
-            <InputText @bind-Value="@media.Photo" class="form-control" />
-            <ValidationMessage For="@(() => media.Photo)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Person:</label>
-        <div>
-            <InputSelect @bind-Value="@media.PersonId" class="form-control">
-                <option value="">--Select Person</option>
-                @if (Persons != null)
-                {
-                    foreach (var person in Persons)
-                    {
-                        <option value="@person.Id">@person.FirstName @person.LastName</option>
-                    }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => media.PersonId)" />
-        </div>
-    </div>
-    <button type="submit" class="btn-btn-success btn-block">
-        Create Media
-    </button>
-</EditForm>
-
+<FormComponent ButtonText="Create Media" OnValidSubmit="@CreateMedia" media="media"/>
 
 @code {
 
     Media media = new Media();
-
-    private IList<Person> Persons;
-
-    protected async override Task OnInitializedAsync()
-    {
-        Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
-    }
 
     private async Task CreateMedia()
     {

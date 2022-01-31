@@ -2,7 +2,7 @@
 <EditForm Model="@person" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <fieldset disabled=" @Disabled">
+    <fieldset disabled="@Disabled">
         <div class="form-group">
             <label>First Name:</label>
             <div>
@@ -48,14 +48,13 @@
             </div>
         </div>
     </fieldset>
-
     @if (!Disabled)
     {
         <button type="submit" class="btn-btn-success btn-block">
             @ButtonText
         </button>
     }
-
+    <BackToList Target="persons" />
 </EditForm>
 
 @code {

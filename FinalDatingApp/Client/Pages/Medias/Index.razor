@@ -34,10 +34,10 @@ else
                     <td><img src="@Media.Photo" height="20"/></td>
                     <td>@Media.Person.FirstName @Media.Person.LastName</td>
                     <td>
-                        <a href="/Bookings/view/@Media.Id" class="btn btn-primary">
+                        <a href="/medias/view/@Media.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
                         </a>
-                        <a href="/Bookings/edit/@Media.Id" class="btn btn-warning">
+                        <a href="/medias/edit/@Media.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
                         <button class="btn btn-danger" @onclick="@(()=>Delete(Media.Id))">

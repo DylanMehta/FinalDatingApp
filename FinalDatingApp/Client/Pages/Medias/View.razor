@@ -1,0 +1,14 @@
+﻿@page "/medias/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View</h3>
+<FormComponent media="media" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    Media media = new Media();
+    protected async override Task OnParametersSetAsync()
+    {
+        media = await
+       _client.GetFromJsonAsync<Media>($"{Endpoints.MediasEndpoint}/{id}");
+    }
+}

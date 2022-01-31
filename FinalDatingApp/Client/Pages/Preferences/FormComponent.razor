@@ -1,20 +1,28 @@
 ﻿<EditForm Model="@preference" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-
-    <div class="form-group">
-        <label>Target Gender:</label>
-        <div>
-            <InputText @bind-Value="@preference.TargetGender" class="form-control" />
-            <ValidationMessage For="@(() => preference.TargetGender)" />
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Target Gender:</label>
+            <div>
+                <InputText @bind-Value="@preference.TargetGender" class="form-control" />
+                <ValidationMessage For="@(() => preference.TargetGender)" />
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn-btn-success btn-block">
-        @ButtonText
-    </button>
+    </fieldset>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn-btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+
+
+    <BackToList Target="preferences" />
 </EditForm>
 
 @code {
+    [Parameter] public bool Disabled { get; set; } = false;
     [Parameter] public Preference preference { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }

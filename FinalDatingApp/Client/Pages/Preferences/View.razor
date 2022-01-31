@@ -1,0 +1,14 @@
+﻿@page "/preferences/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View</h3>
+<FormComponent preference="preference" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    Preference preference = new Preference();
+    protected async override Task OnParametersSetAsync()
+    {
+        preference = await
+       _client.GetFromJsonAsync<Preference>($"{Endpoints.PreferencesEndpoint}/{id}");
+    }
+}

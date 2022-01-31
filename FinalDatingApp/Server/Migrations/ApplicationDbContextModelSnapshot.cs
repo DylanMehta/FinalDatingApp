@@ -94,7 +94,7 @@ namespace FinalDatingApp.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a431fc3-b5d5-47e5-b66d-3a73ee646b07",
+                            ConcurrencyStamp = "1b3e918d-99b5-4973-8413-d022b68b3649",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -102,9 +102,9 @@ namespace FinalDatingApp.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPoxFWWd4OKDsqEdNBexF1ZoQSr0gaXhGfnDrIAzgxM2R3As4sVzQv/tRTRjBMdkww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEImS/U6lEMYijcM5FJKUzO9AFqbf8WMtmAK80vdM/YbjCgI6vBSdorVlSJoQEliGgA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "227f80f4-2ebf-48c4-8221-e8139bc32268",
+                            SecurityStamp = "353f5f29-e8c8-42d9-84ab-ee08b7f55a35",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -384,14 +384,14 @@ namespace FinalDatingApp.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "44a6022b-7b65-46d6-aa1d-94a09d839742",
+                            ConcurrencyStamp = "5af87289-a7a2-4c8a-a9c9-d029ae1b5a8a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "8f728a1d-730a-4f57-a946-9fd146fe6559",
+                            ConcurrencyStamp = "0bd7136d-6190-4adb-bb1e-642f82de3fb5",
                             Name = "User",
                             NormalizedName = "USER"
                         });

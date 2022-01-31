@@ -1,0 +1,23 @@
+﻿@page "/medias/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditMedia" media="media" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Media media = new Media();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        media = await _client.GetFromJsonAsync<Media>($"{Endpoints.MediasEndpoint}/{id}");
+    }
+    async Task EditMedia()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.MediasEndpoint}/{id}", media);
+        _navManager.NavigateTo("/medias/");
+    }
+
+}
