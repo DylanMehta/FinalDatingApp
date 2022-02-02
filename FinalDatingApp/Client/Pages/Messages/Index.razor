@@ -1,9 +1,9 @@
 ﻿@page "/messages/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 @attribute [Authorize]
-
-
 
 <h3>Messages</h3>
 <a href="/messages/create" class="btn btn-secondary">
@@ -13,15 +13,13 @@
 <br />
 <br />
 
-
-
 @if (Messages == null)
 {
     <div class="alert alert-info">Loading Messages...</div>
 }
 else
 {
-    <table class="table table-responsive" id="bookingsTable">
+    <table class="table table-responsive" id="messagesTable">
         <thead>
             <tr>
                 <th>Message Id</th>
@@ -60,15 +58,12 @@ else
     private List<Message> Messages;
     private List<Person> Persons;
 
-
-
     protected async override Task OnInitializedAsync()
     {
+        _interceptor.MonitorEvent();
         Messages = await _client.GetFromJsonAsync<List<Message>>($"{Endpoints.MessagesEndpoint}");
         Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
     }
-
-
 
     async Task Delete(int messageId)
     {
@@ -81,11 +76,19 @@ else
         }
     }
 
-
-
     private String GetName(int id)
     {
         var name = Persons.First(q => q.Id == id);
         return name.FirstName + " " + name.LastName;
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#messagesTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#messagesTable");
     }
 }

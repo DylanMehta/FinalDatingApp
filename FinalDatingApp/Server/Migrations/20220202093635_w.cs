@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinalDatingApp.Server.Migrations
 {
-    public partial class newdb : Migration
+    public partial class w : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -301,14 +301,14 @@ namespace FinalDatingApp.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "9aa1051e-18ec-422e-b22d-6220c2927bc7", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "27f14241-df24-464c-9689-41db1f77ffd1", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "fab70ef6-aad5-4cb5-a7bf-ba07d162b377", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "8d9adcc7-0fd6-4d62-9366-36b118612637", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "334d03b1-d005-4b29-be8d-b455741fd49e", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEPY/ny2DpLFzk6fR113rJN9R8hyEpzaR5epCtBrRc5VebBpiXieyZQPh7pC5fNOCoA==", null, false, "eeecb9ee-bdac-4669-bd3f-9035753a4391", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "24ca60cd-fcfb-4b3a-b9f9-9d000d9b5625", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEOOFi3pWgSLn88GcqN6T7DFNrx0ehKK89CtL3E/9lPy9xaHDTCQqAhgNWS8K9yN3jA==", null, false, "960dce35-85b5-4f78-9389-3fbdc8634527", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Preferences",

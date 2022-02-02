@@ -1,6 +1,8 @@
 ﻿@page "/preferences/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 @attribute [Authorize]
 
 <h3>Preferences</h3>
@@ -17,7 +19,7 @@
 }
 else
 {
-    <table class="table table-responsive" id="bookingsTable">
+    <table class="table table-responsive" id="preferencesTable">
         <thead>
             <tr>
                 <th>Preference Id</th>
@@ -53,6 +55,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
+        _interceptor.MonitorEvent();
         Preferences = await _client.GetFromJsonAsync<List<Preference>>($"{Endpoints.PreferencesEndpoint}");
     }
 
@@ -65,5 +68,15 @@ else
             await _client.DeleteAsync($"{Endpoints.PreferencesEndpoint}/{preferenceId}");
             await OnInitializedAsync();
         }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#preferencesTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#preferencesTable");
     }
 }

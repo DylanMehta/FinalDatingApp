@@ -1,6 +1,8 @@
 ﻿@page "/matchs/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject HttpInterceptorService _interceptor 
+@implements IDisposable
 @attribute [Authorize]
 
 <h3>Matchs</h3>
@@ -17,7 +19,7 @@
 }
 else
 {
-    <table class="table table-responsive" id="bookingsTable">
+    <table class="table table-responsive" id="matchsTable"> 
         <thead>
             <tr>
                 <th>Match Id</th>
@@ -57,6 +59,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
+        _interceptor.MonitorEvent();
         Matchs = await _client.GetFromJsonAsync<List<Match>>($"{Endpoints.MatchsEndpoint}");
     }
 
@@ -69,5 +72,16 @@ else
             await _client.DeleteAsync($"{Endpoints.MatchsEndpoint}/{matchId}");
             await OnInitializedAsync();
         }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#matchsTable");
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
+        js.InvokeVoidAsync("DataTablesDispose", "#matchsTable");
     }
 }
