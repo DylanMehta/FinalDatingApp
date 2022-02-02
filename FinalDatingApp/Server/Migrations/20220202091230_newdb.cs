@@ -93,7 +93,7 @@ namespace FinalDatingApp.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TargetGender = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TargetGender = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -212,9 +212,9 @@ namespace FinalDatingApp.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     PreferenceId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -262,7 +262,7 @@ namespace FinalDatingApp.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PersonId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -282,7 +282,7 @@ namespace FinalDatingApp.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MatchId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -301,14 +301,14 @@ namespace FinalDatingApp.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "5af87289-a7a2-4c8a-a9c9-d029ae1b5a8a", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "0bd7136d-6190-4adb-bb1e-642f82de3fb5", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "9aa1051e-18ec-422e-b22d-6220c2927bc7", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "27f14241-df24-464c-9689-41db1f77ffd1", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "1b3e918d-99b5-4973-8413-d022b68b3649", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEImS/U6lEMYijcM5FJKUzO9AFqbf8WMtmAK80vdM/YbjCgI6vBSdorVlSJoQEliGgA==", null, false, "353f5f29-e8c8-42d9-84ab-ee08b7f55a35", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "334d03b1-d005-4b29-be8d-b455741fd49e", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEPY/ny2DpLFzk6fR113rJN9R8hyEpzaR5epCtBrRc5VebBpiXieyZQPh7pC5fNOCoA==", null, false, "eeecb9ee-bdac-4669-bd3f-9035753a4391", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Preferences",
