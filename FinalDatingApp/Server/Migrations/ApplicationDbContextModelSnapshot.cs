@@ -94,7 +94,7 @@ namespace FinalDatingApp.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24ca60cd-fcfb-4b3a-b9f9-9d000d9b5625",
+                            ConcurrencyStamp = "e1c37882-aba9-4d05-af33-4f109c834277",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -102,12 +102,34 @@ namespace FinalDatingApp.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOOFi3pWgSLn88GcqN6T7DFNrx0ehKK89CtL3E/9lPy9xaHDTCQqAhgNWS8K9yN3jA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKs1XO7/piRVJvs2t32veAXyEWtM7sdoXCX9YtImzc6wIuj0OILDsrsaljPFdPJB5Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "960dce35-85b5-4f78-9389-3fbdc8634527",
+                            SecurityStamp = "c540e20f-e3f3-4a82-8de9-2cd8ad45b7aa",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
+                });
+
+            modelBuilder.Entity("FinalDatingApp.Shared.Domain.Block", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BlockedId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlockerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlockedId");
+
+                    b.HasIndex("BlockerId");
+
+                    b.ToTable("Blocks");
                 });
 
             modelBuilder.Entity("FinalDatingApp.Shared.Domain.Match", b =>
@@ -392,14 +414,14 @@ namespace FinalDatingApp.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "fab70ef6-aad5-4cb5-a7bf-ba07d162b377",
+                            ConcurrencyStamp = "50fa2f00-3726-43aa-a34d-a0afe4bf1e4d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "8d9adcc7-0fd6-4d62-9366-36b118612637",
+                            ConcurrencyStamp = "ec226c4f-ff52-433a-91d8-302e2af34e2c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -520,6 +542,25 @@ namespace FinalDatingApp.Server.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FinalDatingApp.Shared.Domain.Block", b =>
+                {
+                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "BlockedPerson")
+                        .WithMany("Blocked")
+                        .HasForeignKey("BlockedId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FinalDatingApp.Shared.Domain.Person", "BlockerPerson")
+                        .WithMany("Blocker")
+                        .HasForeignKey("BlockerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BlockedPerson");
+
+                    b.Navigation("BlockerPerson");
+                });
+
             modelBuilder.Entity("FinalDatingApp.Shared.Domain.Match", b =>
                 {
                     b.HasOne("FinalDatingApp.Shared.Domain.Person", "FirstPerson")
@@ -625,6 +666,10 @@ namespace FinalDatingApp.Server.Migrations
 
             modelBuilder.Entity("FinalDatingApp.Shared.Domain.Person", b =>
                 {
+                    b.Navigation("Blocked");
+
+                    b.Navigation("Blocker");
+
                     b.Navigation("FirstMatch");
 
                     b.Navigation("SecondMatch");

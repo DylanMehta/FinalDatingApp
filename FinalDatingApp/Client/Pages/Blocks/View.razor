@@ -1,0 +1,14 @@
+﻿@page "/blocks/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View</h3>
+<FormComponent block="block" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    Block block = new Block();
+    protected async override Task OnParametersSetAsync()
+    {
+        block = await
+       _client.GetFromJsonAsync<Block>($"{Endpoints.BlocksEndpoint}/{id}");
+    }
+}

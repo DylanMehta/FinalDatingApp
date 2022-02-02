@@ -1,0 +1,21 @@
+﻿@page "/blocks/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Block</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Create" OnValidSubmit="@CreateBlock" block="block" />
+
+@code {
+
+    Block block = new Block();
+
+    private async Task CreateBlock()
+    {
+        await _client.PostAsJsonAsync(Endpoints.BlocksEndpoint, block);
+        _navManager.NavigateTo("/blocks");
+    }
+
+}

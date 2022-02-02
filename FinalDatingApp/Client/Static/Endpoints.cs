@@ -14,5 +14,6 @@ namespace FinalDatingApp.Client.Static
         public static readonly string MediasEndpoint = $"{Prefix}/medias";
         public static readonly string MatchsEndpoint = $"{Prefix}/matchs";
         public static readonly string MessagesEndpoint = $"{Prefix}/messages";
+        public static readonly string BlocksEndpoint = $"{Prefix}/blocks";
     }
 }

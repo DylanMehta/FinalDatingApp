@@ -1,0 +1,63 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@block" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Blocker:</label>
+            <div>
+                <InputSelect @bind-Value="@block.BlockerId" class="form-control">
+                    <option value="">--Select Blocker--</option>
+                    @if (Persons != null)
+                    {
+                        foreach (var person in Persons)
+                        {
+                            <option value="@person.Id">@person.FirstName @person.LastName</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => block.BlockerId)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Blocked:</label>
+            <div>
+                <InputSelect @bind-Value="@block.BlockedId" class="form-control">
+                    <option value="">--Select Blocked--</option>
+                    @if (Persons != null)
+                    {
+                        foreach (var person in Persons)
+                        {
+                            <option value="@person.Id">@person.FirstName @person.LastName</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => block.BlockedId)" />
+            </div>
+        </div>
+    </fieldset>
+
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn-btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+
+    <BackToList Target="blocks" />
+</EditForm>
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Block block { get; set; }
+    [Parameter] public String ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Person> Persons;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
+    }
+}

@@ -30,5 +30,8 @@ namespace FinalDatingApp.Shared.Domain
 
         public ICollection<Match> FirstMatch { get; set; } = new List<Match>();
         public ICollection<Match> SecondMatch { get; set; } = new List<Match>();
+
+        public ICollection<Block> Blocker { get; set; } = new List<Block>();
+        public ICollection<Block> Blocked { get; set; } = new List<Block>();
     }
 }

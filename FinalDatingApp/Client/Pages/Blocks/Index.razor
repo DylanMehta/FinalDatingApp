@@ -1,0 +1,83 @@
+﻿@page "/blocks/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
+@attribute [Authorize]
+
+<h3>Blocks</h3>
+<a href="/blocks/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Block
+</a>
+<br />
+<br />
+
+@if (Blocks == null)
+{
+    <div class="alert alert-info">Loading Blocks...</div>
+}
+else
+{
+    <table class="table table-responsive" id="blocksTable">
+        <thead>
+            <tr>
+                <th>Block Id</th>
+                <th>Blocker</th>
+                <th>Blocked</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Block in Blocks)
+            {
+                <tr>
+                    <td>@Block.Id</td>
+                    <td>@Block.BlockerPerson.FirstName @Block.BlockerPerson.LastName</td>
+                    <td>@Block.BlockedPerson.FirstName @Block.BlockedPerson.LastName</td>
+                    <td>
+                        <a href="/blocks/view/@Block.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/blocks/edit/@Block.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Block.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Block> Blocks;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Blocks = await _client.GetFromJsonAsync<List<Block>>($"{Endpoints.BlocksEndpoint}");
+    }
+
+    async Task Delete(int blockId)
+    {
+        var block = Blocks.First(q => q.Id == blockId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you sure you want to delete?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.BlocksEndpoint}/{blockId}");
+            await OnInitializedAsync();
+        }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#blocksTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#blocksTable");
+    }
+}

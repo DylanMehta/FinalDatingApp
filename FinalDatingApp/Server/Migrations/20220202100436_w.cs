@@ -230,6 +230,32 @@ namespace FinalDatingApp.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Blocks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlockerId = table.Column<int>(type: "int", nullable: false),
+                    BlockedId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blocks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Blocks_Persons_BlockedId",
+                        column: x => x.BlockedId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Blocks_Persons_BlockerId",
+                        column: x => x.BlockerId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Matchs",
                 columns: table => new
                 {
@@ -301,14 +327,14 @@ namespace FinalDatingApp.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "fab70ef6-aad5-4cb5-a7bf-ba07d162b377", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "8d9adcc7-0fd6-4d62-9366-36b118612637", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "50fa2f00-3726-43aa-a34d-a0afe4bf1e4d", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "ec226c4f-ff52-433a-91d8-302e2af34e2c", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "24ca60cd-fcfb-4b3a-b9f9-9d000d9b5625", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEOOFi3pWgSLn88GcqN6T7DFNrx0ehKK89CtL3E/9lPy9xaHDTCQqAhgNWS8K9yN3jA==", null, false, "960dce35-85b5-4f78-9389-3fbdc8634527", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "e1c37882-aba9-4d05-af33-4f109c834277", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEKs1XO7/piRVJvs2t32veAXyEWtM7sdoXCX9YtImzc6wIuj0OILDsrsaljPFdPJB5Q==", null, false, "c540e20f-e3f3-4a82-8de9-2cd8ad45b7aa", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Preferences",
@@ -372,6 +398,16 @@ namespace FinalDatingApp.Server.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blocks_BlockedId",
+                table: "Blocks",
+                column: "BlockedId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blocks_BlockerId",
+                table: "Blocks",
+                column: "BlockerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
@@ -441,6 +477,9 @@ namespace FinalDatingApp.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Blocks");
 
             migrationBuilder.DropTable(
                 name: "DeviceCodes");

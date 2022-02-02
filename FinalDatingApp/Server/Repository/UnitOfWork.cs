@@ -19,6 +19,7 @@ namespace FinalDatingApp.Server.Repository
         private IGenericRepository<Media> _medias;
         private IGenericRepository<Message> _messages;
         private IGenericRepository<Preference> _preferences;
+        private IGenericRepository<Block> _blocks;
 
         private UserManager<ApplicationUser> _userManager;
 
@@ -38,6 +39,8 @@ namespace FinalDatingApp.Server.Repository
             => _messages ??= new GenericRepository<Message>(_context);
         public IGenericRepository<Preference> Preferences
             => _preferences ??= new GenericRepository<Preference>(_context);
+        public IGenericRepository<Block> Blocks
+            => _blocks ??= new GenericRepository<Block>(_context);
 
         public void Dispose()
         {

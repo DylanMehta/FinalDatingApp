@@ -40,6 +40,18 @@ namespace FinalDatingApp.Server.Data
             .WithMany(t => t.SecondMatch)
             .HasForeignKey(m => m.SecondPersonId)
             .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Block>()
+            .HasOne(m => m.BlockerPerson)
+            .WithMany(t => t.Blocker)
+            .HasForeignKey(m => m.BlockerId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Block>()
+            .HasOne(m => m.BlockedPerson)
+            .WithMany(t => t.Blocked)
+            .HasForeignKey(m => m.BlockedId)
+            .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Person> Persons { get; set; }
@@ -47,5 +59,6 @@ namespace FinalDatingApp.Server.Data
         public DbSet<Media> Medias { get; set; }
         public DbSet<Match> Matchs { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Block> Blocks { get; set; }
     }
 }

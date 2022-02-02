@@ -13,5 +13,6 @@ namespace FinalDatingApp.Server.IRepository
         IGenericRepository<Media> Medias { get; }
         IGenericRepository<Message> Messages { get; }
         IGenericRepository<Preference> Preferences { get; }
+        IGenericRepository<Block> Blocks { get; }
     }
 }
