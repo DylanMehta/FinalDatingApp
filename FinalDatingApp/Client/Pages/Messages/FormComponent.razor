@@ -19,7 +19,10 @@
                     {
                         foreach (var match in Matchs)
                         {
-                            <option value="@match.Id">@match.FirstPerson.FirstName @match.FirstPerson.LastName, @match.SecondPerson.FirstName @match.SecondPerson.LastName</option>
+                            if (match.AcceptOrNot == true)
+                            {
+                                <option value="@match.Id">@match.FirstPerson.FirstName @match.FirstPerson.LastName, @match.SecondPerson.FirstName @match.SecondPerson.LastName</option>
+                            }
                         }
                     }
                 </InputSelect>

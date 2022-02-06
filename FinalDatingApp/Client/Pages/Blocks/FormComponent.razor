@@ -29,7 +29,10 @@
                     {
                         foreach (var person in Persons)
                         {
-                            <option value="@person.Id">@person.FirstName @person.LastName</option>
+                            if (!block.BlockerId.Equals(person.Id))
+                            {
+                                <option value="@person.Id">@person.FirstName @person.LastName</option>
+                            }
                         }
                     }
                 </InputSelect>
