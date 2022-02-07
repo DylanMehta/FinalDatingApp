@@ -36,9 +36,30 @@
                     {
                         foreach (var person in Persons)
                         {
+                            var check = true;
                             @if (!person.Id.Equals(match.FirstPersonId))
                             {
-                                <option value="@person.Id">@person.FirstName - @person.LastName</option>
+                                @if (Blocks != null)
+                                {
+                                    foreach (var block in Blocks)
+                                    {
+                                        @if (block.BlockedId.Equals(match.FirstPersonId))
+                                        {
+                                            @if (block.BlockerId.Equals(person.Id))
+                                            {
+                                                check = false;
+                                            }
+                                        }
+                                    }
+                                    @if (check == true)
+                                    {
+                                        <option value="@person.Id">@person.FirstName - @person.LastName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@person.Id">@person.FirstName - @person.LastName</option>
+                                }
                             }
                         }
                     }
