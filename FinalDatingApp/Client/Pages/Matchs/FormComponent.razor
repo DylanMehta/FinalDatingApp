@@ -67,14 +67,27 @@
                 <ValidationMessage For="@(() => match.SecondPersonId)" />
             </div>
         </div>
+        @if (match.AcceptOrNot.Equals(false))
+        {
+            block.BlockerId = match.SecondPersonId;
+            block.BlockedId = match.FirstPersonId;
+        }
     </fieldset>
     @if (!Disabled)
     {
-        <button type="submit" class="btn-btn-success btn-block">
-            @ButtonText
-        </button>
+        @if (match.AcceptOrNot.Equals(false))
+        {
+            <button type="submit" class="btn-btn-success btn-block" @onclick="@blockcreate">
+                @ButtonText
+            </button>
+        }
+        else
+        {
+            <button type="submit" class="btn-btn-success btn-block" >
+                @ButtonText
+            </button>
+        }
     }
-
     <BackToList Target="matchs" />
 </EditForm>
 
@@ -86,10 +99,16 @@
 
     private IList<Person> Persons;
     private IList<Block> Blocks;
+    Block block = new Block();
 
     protected async override Task OnInitializedAsync()
     {
         Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
         Blocks = await _client.GetFromJsonAsync<List<Block>>($"{Endpoints.BlocksEndpoint}");
+    }
+
+    private void blockcreate()
+    {
+        _client.PostAsJsonAsync(Endpoints.BlocksEndpoint, block);
     }
 }
