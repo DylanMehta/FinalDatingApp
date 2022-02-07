@@ -36,7 +36,10 @@
                     {
                         foreach (var person in Persons)
                         {
-                            <option value="@person.Id">@person.FirstName - @person.LastName</option>
+                            @if (!person.Id.Equals(match.FirstPersonId))
+                            {
+                                <option value="@person.Id">@person.FirstName - @person.LastName</option>
+                            }
                         }
                     }
                 </InputSelect>
@@ -61,9 +64,11 @@
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
     private IList<Person> Persons;
+    private IList<Block> Blocks;
 
     protected async override Task OnInitializedAsync()
     {
         Persons = await _client.GetFromJsonAsync<List<Person>>($"{Endpoints.PersonsEndpoint}");
+        Blocks = await _client.GetFromJsonAsync<List<Block>>($"{Endpoints.BlocksEndpoint}");
     }
 }
